@@ -5,5 +5,6 @@ class SayController < ApplicationController
   end
 
   def goodbye
+    @dirs = Dir.glob("*")
   end
 end
