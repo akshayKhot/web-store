@@ -3,8 +3,16 @@
 <% end %>
 
 <h2>Your Pragmatic Cart</h2>
-<ul>
-  <% @cart.line_items.each do |item| %>
-  <li> <%= item.quantity %> &times; <%= item.product.title %></li>
-  <% end %>
-</ul>
+
+<% if @cart.line_items.empty? %>
+  <p>The cart is empty.</p>
+<% else %>
+  <ul>
+    <% @cart.line_items.each do |item| %>
+      <li> <%= item.quantity %> &times; <%= item.product.title %></li>
+    <% end %>
+  </ul>
+
+  <%= button_to "Empty Cart", @cart, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+
