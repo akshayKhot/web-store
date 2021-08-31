@@ -5,10 +5,7 @@
 
   <h2>Your Pragmatic Cart</h2>
 
-  <% if cart.line_items.empty? %>
-    <p>The cart is empty.</p>
-  <% else %>
-
+  <% unless cart.line_items.empty? %>
     <table>
       <%= render(cart.line_items) %>
 
