@@ -9,6 +9,9 @@ class CartsController < ApplicationController
 
   # GET /carts/1 or /carts/1.json
   def show
+    unless @cart.id == session[:cart_id]
+      redirect_to store_index_url, notice: "You don't have access to view this cart."
+    end
   end
 
   # GET /carts/new
@@ -22,17 +25,7 @@ class CartsController < ApplicationController
 
   # POST /carts or /carts.json
   def create
-    @cart = Cart.new(cart_params)
 
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: "Cart was successfully created." }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /carts/1 or /carts/1.json
