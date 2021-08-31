@@ -5,19 +5,17 @@
 
   <h2>Your Pragmatic Cart</h2>
 
-  <% unless cart.line_items.empty? %>
-    <table>
-      <%= render(cart.line_items) %>
+  <table>
+    <%= render(cart.line_items) %>
 
-      <tfoot>
-      <tr>
-        <th colspan="2">Total:</th>
-        <th class="price"><%= number_to_currency(cart.total_price) %></th>
-      </tr>
-      </tfoot>
-    </table>
+    <tfoot>
+    <tr>
+      <th colspan="2">Total:</th>
+      <th class="price"><%= number_to_currency(cart.total_price) %></th>
+    </tr>
+    </tfoot>
+  </table>
 
-    <%= button_to "Empty Cart", cart, method: :delete, data: { confirm: "Are you sure?" } %>
-  <% end %>
+  <%= button_to "Empty Cart", cart, method: :delete, data: { confirm: "Are you sure?" } %>
 
 </article>

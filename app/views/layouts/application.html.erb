@@ -19,11 +19,11 @@
 <section class="content">
   <nav class="side_nav">
 
-    <% if @cart %>
-      <div id="cart" class="carts">
+    <div id="cart" class="carts">
+      <% if @cart && @cart.line_items.any? %>
         <%= render @cart %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
     <ul>
       <li><a href="/">Home</a></li>
