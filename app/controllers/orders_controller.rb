@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  include CurrentCart
+  before_action :set_cart, only: %i[ new create ]
+  before_action :ensure_cart_not_empty, only: %i[ new ]
   before_action :set_order, only: %i[ show edit update destroy ]
 
   # GET /orders or /orders.json
@@ -65,5 +68,12 @@ class OrdersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def order_params
       params.require(:order).permit(:name, :address, :email, :pay_type)
+    end
+    
+    # To prevent empty orders
+    def ensure_cart_not_empty
+      if @cart.line_items.empty?
+        redirect_to store_index_url, notice: "Your cart is empty"
+      end
     end
 end
